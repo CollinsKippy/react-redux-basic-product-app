@@ -4,8 +4,8 @@ import './style.css';
 export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+      <h1>Products App</h1>
+      <p>With Bootstrap version 5.2.3</p>
     </div>
   );
 }
