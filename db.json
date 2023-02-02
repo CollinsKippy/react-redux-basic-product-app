@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": "1234abc",
+      "name": "Watch",
+      "categoryName": "Electronics",
+      "categoryId": 1
+    },
+    {
+      "id": "55443abc",
+      "name": "Phone",
+      "categoryName": "Electronics",
+      "categoryId": 1
+    }
+  ]
+}
