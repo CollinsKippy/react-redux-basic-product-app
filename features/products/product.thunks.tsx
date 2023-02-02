@@ -2,14 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from '../../app/constants';
 // import { loadProductsFailed, loadProductsSuccess } from './product.actions';
 
-const productsUrl = BASE_URL + '/products';
+const productsUrl = BASE_URL + '/albums';
 
 export const fetchProducts = createAsyncThunk(
   '[PRODUCTS API] Load Products',
   async () => {
     const res = await fetch(productsUrl, {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
