@@ -6,7 +6,7 @@ const productsUrl = BASE_URL + '/albums';
 
 export const fetchProducts = createAsyncThunk(
   '[PRODUCTS API] Load Products',
-  async () => {
+  async (ThunkAPI) => {
     const res = await fetch(productsUrl, {
       method: 'GET',
       headers: {

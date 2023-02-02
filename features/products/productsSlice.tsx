@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppState } from '../../app/store';
+import { RootState } from '../../app/store';
 import { Product } from '../../entities/product';
 import { fetchProducts } from './product.thunks';
 
@@ -18,24 +18,42 @@ const initialState: ProductState = {
 export const productSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    // loadProducts: (state, action) => {
+    //   return { ...state, isLoading: true };
+    // },
+    // loadProductsSuccess: (state, action) => {
+    //   return {
+    //     ...state,
+    //     products: action.payload,
+    //     isLoading: false,
+    //   };
+    // },
+    // loadProductsFailed: (state, action) => {
+    //   return {
+    //     ...state,
+    //     error: action.payload,
+    //     isLoading: false,
+    //   };
+    // },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
         return { ...state, isLoading: true };
       })
-      .addCase(
-        fetchProducts.fulfilled,
-        (state, action: PayloadAction<Product[]>) => {
-          return { ...state, products: action.payload };
-        }
-      )
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        return { ...state, products: action.payload };
+      })
       .addCase(fetchProducts.rejected, (state, action) => {
         return { ...state, error: action.payload };
       });
   },
 });
 
-export const selectProducts = (state: AppState) => state.products;
+export const selectProducts = (state: RootState) => state.products;
+
+// export const { loadProducts, loadProductsSuccess, loadProductsFailed } =
+//   productSlice.actions;
 
 export default productSlice.reducer;
