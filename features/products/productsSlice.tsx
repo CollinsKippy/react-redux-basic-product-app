@@ -1,22 +1,37 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BASE_URL } from '../../app/constants';
 import { RootState } from '../../app/store';
 import { Product } from '../../entities/product';
-import { fetchProducts } from './product.thunks';
+
+const productsUrl = BASE_URL + '/albums';
 
 export interface ProductState {
   products: Product[];
-  isLoading: boolean;
-  error: string | null;
+  error: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: ProductState = {
   products: [],
-  isLoading: false,
-  error: null,
+  error: 'idle',
 };
 
+export const fetchProducts = createAsyncThunk(
+  '[PRODUCTS API] Load Products',
+  async () => {
+    const res = await fetch(productsUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = (await res.json()) as Product[];
+    console.log({ data });
+    return data;
+  }
+);
+
 export const productSlice = createSlice({
-  name: 'products',
+  name: 'product',
   initialState,
   reducers: {
     // loadProducts: (state, action) => {
@@ -40,18 +55,19 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        return { ...state, isLoading: true };
+        state.status = 'loading';
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        return { ...state, products: action.payload };
+        state.status = 'idle';
+        state.products.push(action.payload);
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        return { ...state, error: action.payload };
+        state.status = 'failed';
       });
   },
 });
 
-export const selectProducts = (state: RootState) => state.products;
+export const selectProducts = (state: RootState) => state.product.products;
 
 // export const { loadProducts, loadProductsSuccess, loadProductsFailed } =
 //   productSlice.actions;
