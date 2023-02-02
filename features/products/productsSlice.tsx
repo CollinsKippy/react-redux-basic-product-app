@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { AppState } from '../../app/store';
 import { Product } from '../../entities/product';
+import { fetchProducts } from './product.thunks';
 
-interface ProductState {
+export interface ProductState {
   products: Product[];
   isLoading: boolean;
-  error: string;
+  error: string | null;
 }
 
 const initialState: ProductState = {
@@ -13,10 +15,17 @@ const initialState: ProductState = {
   error: null,
 };
 
-export const counterSlice = createSlice({
+export const productSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {
-    
-  }
-})
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state, action) => {
+      return { ...state, isLoading: true };
+    });
+  },
+});
+
+export const selectProducts = (state: AppState) => state.products;
+
+export default productSlice.reducer;
