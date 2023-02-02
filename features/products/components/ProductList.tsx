@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hoots';
-import { store } from '../../../app/store';
+import { AppDispatch, store } from '../../../app/store';
 import { fetchProducts, selectProducts } from '../productsSlice';
 
 const ProductList = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useDispatch<typeof store.dispatch>();
   const products = useSelector(selectProducts);
 
   useEffect(() => {}, []);
@@ -14,7 +14,9 @@ const ProductList = () => {
   return (
     <div>
       <h2>Product List</h2>
-      <button onClick={() => dispatch(fetchProducts())}>Get Products</button>
+      <button onClick={() => store.dispatch(fetchProducts())}>
+        Get Products
+      </button>
       {/* <ul>
         {}
       </ul> */}
