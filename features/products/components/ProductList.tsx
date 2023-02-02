@@ -7,7 +7,9 @@ const ProductList = () => {
   const dispatch = useDispatch();
   // const products = useSelector(selectProducts);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   return <h2>Product List</h2>;
 };
