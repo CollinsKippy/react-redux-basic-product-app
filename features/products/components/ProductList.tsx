@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../app/hoots';
+import { fetchProducts } from '../product.thunks';
 import { selectProducts } from '../productsSlice';
 
 const ProductList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const products = useSelector(selectProducts);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   return <h2>Product List</h2>;
 };
