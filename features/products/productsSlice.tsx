@@ -34,23 +34,23 @@ export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    loadProducts: (state, action) => {
-      return { ...state, isLoading: true };
-    },
-    loadProductsSuccess: (state, action) => {
-      return {
-        ...state,
-        products: action.payload,
-        isLoading: false,
-      };
-    },
-    loadProductsFailed: (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-        isLoading: false,
-      };
-    },
+    // loadProducts: (state, action) => {
+    //   return { ...state, isLoading: true };
+    // },
+    // loadProductsSuccess: (state, action) => {
+    //   return {
+    //     ...state,
+    //     products: action.payload,
+    //     isLoading: false,
+    //   };
+    // },
+    // loadProductsFailed: (state, action) => {
+    //   return {
+    //     ...state,
+    //     error: action.payload,
+    //     isLoading: false,
+    //   };
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -59,7 +59,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.products.push(action.payload);
+        state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
@@ -69,7 +69,7 @@ export const productSlice = createSlice({
 
 export const selectProducts = (state: RootState) => state.product.products;
 
-export const { loadProducts, loadProductsSuccess, loadProductsFailed } =
-  productSlice.actions;
+// export const { loadProducts, loadProductsSuccess, loadProductsFailed } =
+//   productSlice.actions;
 
 export default productSlice.reducer;

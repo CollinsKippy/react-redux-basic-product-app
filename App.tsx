@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './style.css';
-import ProductList from './features/products/components/ProductList'
+import ProductList from './features/products/components/ProductList';
 
 export default function App() {
   return (

@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../app/hoots';
-import { AppDispatch, store } from '../../../app/store';
 import { fetchProducts, selectProducts } from '../productsSlice';
 
-const ProductList = () => {
-  const dispatch = useDispatch();
+export const ProductList = () => {
+  const dispatch = useAppDispatch();
   const products = useSelector(selectProducts);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, [dispatch]);
 
   return (
     <div>
       <h2>Product List</h2>
       <button onClick={() => dispatch(fetchProducts())}>Get Products</button>
-      {/* <ul>
-        {}
-      </ul> */}
+      <ul>
+        {products.map((prod) => {
+          return <li key={prod.id}>{prod.title}</li>;
+        })}
+      </ul>
     </div>
   );
 };
-
-export default ProductList;
