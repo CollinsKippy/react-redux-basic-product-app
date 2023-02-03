@@ -6,7 +6,7 @@ import { AppDispatch, store } from '../../../app/store';
 import { fetchProducts, selectProducts } from '../productsSlice';
 
 const ProductList = () => {
-  // const dispatch = useDispatch<typeof store.dispatch>();
+  const dispatch = useDispatch();
   const products = useSelector(selectProducts);
 
   useEffect(() => {}, []);
@@ -14,9 +14,7 @@ const ProductList = () => {
   return (
     <div>
       <h2>Product List</h2>
-      <button onClick={() => store.dispatch(fetchProducts())}>
-        Get Products
-      </button>
+      <button onClick={() => dispatch(fetchProducts())}>Get Products</button>
       {/* <ul>
         {}
       </ul> */}
