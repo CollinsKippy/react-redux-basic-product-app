@@ -24,7 +24,7 @@ export const fetchProducts = createAsyncThunk(
         'Content-Type': 'application/json',
       },
     });
-    const data = (await res.json()) as Product[];
+    const data = await res.json();
     console.log({ data });
     return data;
   }
