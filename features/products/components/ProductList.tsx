@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../app/hoots';
+import { useAppDispatch, useAppSelector } from '../../../app/hoots';
 import { fetchProducts, selectProducts } from '../productsSlice';
 
 export const ProductList = () => {
   const dispatch = useAppDispatch();
-  const products = useSelector(selectProducts);
+  const products = useAppSelector(selectProducts);
 
   // useEffect(() => {
   //   dispatch(fetchProducts());
